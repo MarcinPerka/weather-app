@@ -1,14 +1,14 @@
 <template>
   <v-app>
+    
   <v-app-bar app>
-    <v-toolbar>
+    <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title><span>Weather</span> App</v-toolbar-title>
     <div class="flex-grow-1"></div>
     <v-toolbar-items>
-        <v-btn to="/" text>Home</v-btn>
+        <v-btn to="/" text>Search</v-btn>
         <v-btn to="/user-locations" text>User Locations</v-btn>
       </v-toolbar-items>
-    </v-toolbar>
   </v-app-bar>
 
   <!-- Sizes your content based upon application components -->
@@ -25,11 +25,19 @@
     </v-container>
   </v-content>
 
-  <v-footer app>
-    <!-- -->
-  </v-footer>
+  <Footer />
 </v-app>
 </template>
+
+<script>
+import Footer from '@/components/Footer.vue'
+
+export default {
+  components:{
+    Footer
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

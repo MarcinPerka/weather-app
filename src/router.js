@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Search from './views/Search.vue'
 import UserLocations from './views/UserLocations.vue'
 import WeatherInfo from './views/WeatherInfo.vue'
 
@@ -12,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'search',
+      component: Search
     },
     {
       path: '/user-locations',
