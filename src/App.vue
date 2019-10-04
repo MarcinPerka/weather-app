@@ -1,11 +1,34 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+  <v-app-bar app>
+    <v-toolbar>
+    <v-toolbar-title><span>Weather</span> App</v-toolbar-title>
+    <div class="flex-grow-1"></div>
+    <v-toolbar-items>
+        <v-btn to="/" text>Home</v-btn>
+        <v-btn to="/user-locations" text>User Locations</v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+  </v-app-bar>
+
+  <!-- Sizes your content based upon application components -->
+  <v-content>
+
+    <!-- Provides the application the proper gutter -->
+    <v-container>
+      <v-row>
+      <v-col cols="12">
+            <router-view></router-view>
+      </v-col>
+      </v-row>
+      
+    </v-container>
+  </v-content>
+
+  <v-footer app>
+    <!-- -->
+  </v-footer>
+</v-app>
 </template>
 
 <style lang="scss">
@@ -17,7 +40,6 @@
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
   a {
     font-weight: bold;
     color: #2c3e50;
