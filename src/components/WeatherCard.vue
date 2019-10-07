@@ -3,7 +3,7 @@
         <v-card
     class="mx-auto"
     color="#F9F9F9"
-    max-width="350"
+    max-width="344"
   >
     <v-list-item two-line>
       <v-list-item-content>
@@ -14,7 +14,7 @@
 
     <v-card-text>
       <v-row align="center">
-        <v-col class="display-3" cols="6">
+        <v-col class="display-2" cols="6">
           {{ weatherForecast.main.temp | formatValue}} &deg;C
         </v-col>
         <v-col cols="6">

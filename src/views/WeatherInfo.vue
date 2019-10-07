@@ -1,10 +1,8 @@
 <template>
 <div>
       <section v-if="errored">
+    <v-icon color="error" dark large>fas fa-times-circle</v-icon>
     <h2>Something went wrong</h2>
-    <v-btn class="mx-2" fab large indeterminate color="error">
-      <v-icon dark>fas fa-times-circle</v-icon>
-    </v-btn>
   </section>
   <section v-else>
     <div v-if="loading"><h2>Loading...</h2>

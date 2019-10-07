@@ -2,16 +2,15 @@
   <div class="hello">
     <v-text-field
             outlined
-            label="Search..."
+            label="Search by city or country code..."
             append-icon="fas fa-search"
             v-model="city"
-            @change="getCities"
+            :rules="inputRules"
+            @keypress.enter="getCities"
           ></v-text-field>
           <section v-if="errored">
+            <v-icon color="error" dark large>fas fa-times-circle</v-icon>
     <h2>Something went wrong</h2>
-    <v-btn class="mx-2" fab large indeterminate color="error">
-      <v-icon dark>fas fa-times-circle</v-icon>
-    </v-btn>
   </section>
   <section v-else>
     <div v-if="loading"><h2>Loading...</h2>
@@ -23,8 +22,25 @@
     </div>
      <div v-else>
        <h2>Results</h2>
-       <div class="text-center my-2" v-for="city in cities" :key="city.id">
-    <v-btn type="submit" block rounded color="primary" :to="{name: 'weather', params : {id: city.id}}">{{city.name}}, {{ city.country }}</v-btn>
+       <div class="my-4" v-for="city in cities" :key="city.id">
+         <v-card
+    max-width="500"
+    class="mx-auto text-center rounded-card" 
+    color="grey lighten-2"
+  >
+  <v-row>
+    <v-col cols="3">
+      <v-btn :to="{name: 'weather', params : {id: city.id}}" icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
+    </v-col>
+    <v-col cols="6">
+    <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
+    </v-col>
+    <v-col cols="3">
+    <v-btn icon><v-icon>far fa-heart</v-icon></v-btn>
+    </v-col>
+  </v-row>
+  </v-card>
+  <!--  <v-btn type="submit" block rounded color="primary" :to="{name: 'weather', params : {id: city.id}}">{{city.name}}, {{ city.country }}</v-btn> -->
     </div>
     </div>
   </section>
@@ -41,13 +57,18 @@ export default {
       cities: {},
       loading: false,
       errored: false,
-      savedCities: []
+      savedCities: [],
+      inputRules: [
+        v => !!v || "Place some text please",
+        v => !/^\s+$/.test(v) || "Place some text please"
+      ]
     }
   },
   methods:{
     getCities(city){
       this.loading = true
-      let url = `http://cities-ids.herokuapp.com?q=${city}`
+      let url = `http://openweathermap-helper.herokuapp.com/?q=${city}`
+//      let url = `http://cities-ids.herokuapp.com/?q=${city}`
       axios
         .get(url, { timeout: 5000 })
         .then(response => { 
@@ -78,6 +99,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.rounded-card{
+    border-radius:20px;
+}
+</style>
 
   
 

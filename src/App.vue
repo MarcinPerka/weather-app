@@ -2,13 +2,35 @@
   <v-app>
     
   <v-app-bar app>
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
     <v-toolbar-title><span>Weather</span> App</v-toolbar-title>
     <div class="flex-grow-1"></div>
-    <v-toolbar-items>
+    <v-toolbar-items class="hidden-sm-and-down">
         <v-btn to="/" text>Search</v-btn>
+        <v-btn to="/historical-search" text>Historical Search</v-btn>
         <v-btn to="/user-locations" text>User Locations</v-btn>
       </v-toolbar-items>
+
+      <v-menu>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          v-on="on"
+          icon
+        class="hidden-md-and-up white">
+          <v-icon color="primary">mdi-dots-vertical</v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title><v-btn to="/" text>Search</v-btn></v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title><v-btn to="/historical-search" text>Historical Search</v-btn></v-list-item-title>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-title><v-btn to="/user-locations" text>User Locations</v-btn></v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 
   <!-- Sizes your content based upon application components -->
@@ -25,7 +47,7 @@
     </v-container>
   </v-content>
 
-  <Footer />
+ <!-- <Footer /> -->
 </v-app>
 </template>
 
