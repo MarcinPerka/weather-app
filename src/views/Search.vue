@@ -4,8 +4,8 @@
             outlined
             label="Search by city or country code..."
             append-icon="fas fa-search"
-            v-model="city"
-            :rules="inputRules"
+            v-model="searchInput"
+            
             @keypress.enter="getCities"
           ></v-text-field>
           <section v-if="errored">
@@ -30,7 +30,7 @@
   >
   <v-row>
     <v-col cols="3">
-      <v-btn :to="{name: 'weather', params : {id: city.id}}" icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
+      <v-btn :to="{name: 'forecast', params : {id: city.id}}" icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
     </v-col>
     <v-col cols="6">
     <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
@@ -40,7 +40,6 @@
     </v-col>
   </v-row>
   </v-card>
-  <!--  <v-btn type="submit" block rounded color="primary" :to="{name: 'weather', params : {id: city.id}}">{{city.name}}, {{ city.country }}</v-btn> -->
     </div>
     </div>
   </section>
@@ -53,24 +52,24 @@ import axios from 'axios'
 export default {
   data(){
     return {
-      city: "",
+      searchInput: "",
       cities: {},
       loading: false,
       errored: false,
       savedCities: [],
-      inputRules: [
+      searchInputRules: [
         v => !!v || "Place some text please",
         v => !/^\s+$/.test(v) || "Place some text please"
       ]
     }
   },
   methods:{
-    getCities(city){
+    getCities(searchInput){
       this.loading = true
-      let url = `http://openweathermap-helper.herokuapp.com/?q=${city}`
-//      let url = `http://cities-ids.herokuapp.com/?q=${city}`
+  //    let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
+      let url = `http://cities-ids.herokuapp.com/?q=${searchInput}`
       axios
-        .get(url, { timeout: 5000 })
+        .get(url, { timeout: 500 })
         .then(response => { 
           this.cities = response.data
         })
@@ -86,14 +85,14 @@ export default {
     },
     saveUserCities(){
       const parsed = JSON.stringify(this.savedCities)
-      localStorage.setItem("savedCities", parsed)
+      localStorage.setItem(`savedCities`, parsed)
     }
   },mounted(){
-    if(localStorage.getItem("savedCities")){
+    if(localStorage.getItem(`savedCities`)){
       try{
-        this.userCities = JSON.parse(localStorage.getItem("savedCities"))
+        this.userCities = JSON.parse(localStorage.getItem(`savedCities`))
       }catch(e){
-        localStorage.removeItem("savedCities")
+        localStorage.removeItem(`savedCities`)
       }
     }
   }
@@ -101,9 +100,9 @@ export default {
 </script>
 
 <style scoped>
-.rounded-card{
+  .rounded-card{
     border-radius:20px;
-}
+  } 
 </style>
 
   

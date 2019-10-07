@@ -15,7 +15,7 @@
      <div v-else>
        <h2>Forecast</h2>
        <div class="text-center my-2" v-for="(weatherForecast, index) in weatherForecasts" :key="index">
-        <WeatherCard :weatherForecast="weatherForecast" :cityName="cityName" />
+        <ForecastCard :weatherForecast="weatherForecast" :cityName="cityName" />
         </div>
     </div>
   </section>
@@ -24,11 +24,11 @@
 
 <script>
 import axios from 'axios'
-import WeatherCard from '../components/WeatherCard.vue'
+import ForecastCard from '../components/ForecastCard.vue'
 
 export default {
     components:{
-        WeatherCard
+        ForecastCard
     },
     data(){
         return{
@@ -41,7 +41,7 @@ export default {
     mounted(){
         let url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
             axios
-                .get(url, { timeout: 5000 })
+                .get(url, { timeout: 500 })
                 .then(response =>{
                     this.weatherForecasts=response.data.list
                     this.cityName=response.data.city.name

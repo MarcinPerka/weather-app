@@ -8,7 +8,7 @@
     <v-list-item two-line>
       <v-list-item-content>
         <v-list-item-title class="headline">{{ cityName }}</v-list-item-title>
-        <v-list-item-subtitle>{{ weatherForecast.weather[0].description }}</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ weatherForecast.dt_txt }}, {{ weatherForecast.weather[0].description }}</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 

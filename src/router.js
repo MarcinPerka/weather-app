@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Search from './views/Search.vue'
 import UserLocations from './views/UserLocations.vue'
-import WeatherInfo from './views/WeatherInfo.vue'
+import ForecastInfo from './views/ForecastInfo.vue'
 import HistoricalSearch from './views/HistoricalSearch.vue'
 
 Vue.use(Router)
@@ -22,9 +22,9 @@ export default new Router({
       component: UserLocations
     },
     {
-      path: '/weather/:id',
-      name: 'weather',
-      component: WeatherInfo
+      path: '/forecast/:id',
+      name: 'forecast',
+      component: ForecastInfo
     },
     {
       path: '/historical-search',
