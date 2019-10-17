@@ -5,7 +5,7 @@
     color="#F9F9F9"
     max-width="344"
     :to="{name: 'forecast', params : {id: id}}"
-    :elevation="10"
+    :elevation="8"
   >
     <v-list-item two-line>
       <v-list-item-content>

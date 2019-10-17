@@ -5,7 +5,7 @@
             label="Search by city or country code..."
             append-icon="fas fa-search"
             v-model="searchInput"
-            @change="getCities"
+            @keypress.enter="getCities"
           ></v-text-field>
           <section v-if="errored">
             <v-icon color="error" dark large>fas fa-times-circle</v-icon>
@@ -36,7 +36,7 @@
     <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
     </v-col>
     <v-col cols="3">
-    <v-btn icon @click="toggleFavoritesCities(city.id)" v-bind:style="[favoritesCities.includes(city.id) ? {color:'amber accent-4 '}: {}]"><v-icon>far fa-heart</v-icon></v-btn>
+    <v-btn text icon @click="toggleFavoritesCities(city.id)" v-bind:class="{ 'amber accent-4 ' :favoritesCities.includes(city.id) }"><v-icon >far fa-heart</v-icon></v-btn>
     </v-col>
   </v-row>
   </v-card>
@@ -65,10 +65,10 @@ export default {
     }
   },
   methods:{
-    getCities(searchInput){
+    getCities(){
       this.loading = true
     //  let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
-      let url = `https://cities-ids.herokuapp.com/?q=${searchInput}`
+      let url = `https://cities-ids.herokuapp.com/?q=${this.searchInput}`
       axios
         .get(url, { timeout: 15000 })
         .then(response => { 
@@ -99,7 +99,7 @@ export default {
       if(this.favoritesCities.includes(id) == false)
         this.favoritesCities.push(id)
       else
-        this.favoritesCities.pop(id)
+        this.favoritesCities.pop(this.favoritesCities.indexOf(id))
        this.saveFavoritesCities()
     },
     saveFavoritesCities(){

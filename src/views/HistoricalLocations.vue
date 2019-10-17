@@ -57,9 +57,11 @@ export default {
     
     this.historicalCities = JSON.parse(localStorage.getItem("historicalCities"));
     this.historicalCities.reverse()
+
     for (var i = 0; i < this.historicalCities.length; i++) {
       this.getCurrentWeather(this.historicalCities[i])
     }
+  
     this.loading = false
   }
 }

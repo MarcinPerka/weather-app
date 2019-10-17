@@ -32,7 +32,7 @@ export default {
     },
   data(){
     return{
-      favoritesCities: new Set(),
+      favoritesCities: new Array(),
       savedCurrentWeathers: new Array(),
       loading: true,
       errored: false
@@ -60,7 +60,8 @@ export default {
     for (var i = 0; i < this.favoritesCities.length; i++) {
       this.getCurrentWeather(this.favoritesCities[i])
     }
+  
     this.loading = false
-  }
+}
 }
 </script>
