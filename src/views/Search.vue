@@ -1,12 +1,11 @@
 <template>
   <div class="hello">
-    <v-text-field
+       <v-text-field
             outlined
             label="Search by city or country code..."
             append-icon="fas fa-search"
             v-model="searchInput"
-            
-            @keypress.enter="getCities"
+            @change="getCities"
           ></v-text-field>
           <section v-if="errored">
             <v-icon color="error" dark large>fas fa-times-circle</v-icon>
@@ -26,17 +25,18 @@
          <v-card
     max-width="500"
     class="mx-auto text-center rounded-card" 
-    color="grey lighten-2"
+    color="grey lighten-3"
+    :elevation="10"
   >
   <v-row>
     <v-col cols="3">
-      <v-btn :to="{name: 'forecast', params : {id: city.id}}" icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
+      <v-btn  @click="addToHistoricalCities(city.id)"  icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
     </v-col>
     <v-col cols="6">
     <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
     </v-col>
     <v-col cols="3">
-    <v-btn icon><v-icon>far fa-heart</v-icon></v-btn>
+    <v-btn icon @click="toggleFavoritesCities(city.id)" v-bind:style="[favoritesCities.includes(city.id) ? {color:'amber accent-4 '}: {}]"><v-icon>far fa-heart</v-icon></v-btn>
     </v-col>
   </v-row>
   </v-card>
@@ -56,7 +56,8 @@ export default {
       cities: {},
       loading: false,
       errored: false,
-      savedCities: [],
+      favoritesCities: new Array(),
+      historicalCities: new Array(),
       searchInputRules: [
         v => !!v || "Place some text please",
         v => !/^\s+$/.test(v) || "Place some text please"
@@ -66,10 +67,10 @@ export default {
   methods:{
     getCities(searchInput){
       this.loading = true
-  //    let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
-      let url = `http://cities-ids.herokuapp.com/?q=${searchInput}`
+    //  let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
+      let url = `https://cities-ids.herokuapp.com/?q=${searchInput}`
       axios
-        .get(url, { timeout: 500 })
+        .get(url, { timeout: 15000 })
         .then(response => { 
           this.cities = response.data
         })
@@ -79,20 +80,46 @@ export default {
         })
         .finally(() => this.loading = false)
     },
-    addCity(id){
-       this.savedCities.push(id)
-       this.saveUserCities()
+    addToHistoricalCities(id){
+      if(this.historicalCities.includes(id) == false){
+        this.historicalCities.push(id)
+        this.saveHistoricalCities()
+      }
+      if(this.historicalCities.length > 20){
+        this.historicalCities.pop(this.historicalCities.indexOf(0))
+      }
+
+       this.$router.push({ name: 'forecast', params : {id: id} } ) 
     },
-    saveUserCities(){
-      const parsed = JSON.stringify(this.savedCities)
-      localStorage.setItem(`savedCities`, parsed)
+    saveHistoricalCities(){
+      const parsed = JSON.stringify(this.historicalCities)
+      localStorage.setItem(`historicalCities`, parsed)
+    },
+    toggleFavoritesCities(id){
+      if(this.favoritesCities.includes(id) == false)
+        this.favoritesCities.push(id)
+      else
+        this.favoritesCities.pop(id)
+       this.saveFavoritesCities()
+    },
+    saveFavoritesCities(){
+      const parsed = JSON.stringify(this.favoritesCities)
+      localStorage.setItem(`favoritesCities`, parsed)
     }
   },mounted(){
-    if(localStorage.getItem(`savedCities`)){
+    if(localStorage.getItem(`favoritesCities`)){
       try{
-        this.userCities = JSON.parse(localStorage.getItem(`savedCities`))
+        this.favoritesCities = JSON.parse(localStorage.getItem(`favoritesCities`))
       }catch(e){
-        localStorage.removeItem(`savedCities`)
+        localStorage.removeItem(`favoritesCities`)
+      }
+    }
+
+    if(localStorage.getItem(`historicalCities`)){
+      try{
+        this.historicalCities = JSON.parse(localStorage.getItem(`historicalCities`))
+      }catch(e){
+        localStorage.removeItem(`historicalCities`)
       }
     }
   }

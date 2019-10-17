@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Search from './views/Search.vue'
-import UserLocations from './views/UserLocations.vue'
+import FavoritesLocations from './views/FavoritesLocations.vue'
 import ForecastInfo from './views/ForecastInfo.vue'
-import HistoricalSearch from './views/HistoricalSearch.vue'
+import HistoricalLocations from './views/HistoricalLocations.vue'
 
 Vue.use(Router)
 
@@ -17,9 +17,9 @@ export default new Router({
       component: Search
     },
     {
-      path: '/user-locations',
-      name: 'user-locations',
-      component: UserLocations
+      path: '/favorites-locations',
+      name: 'favorites-locations',
+      component: FavoritesLocations
     },
     {
       path: '/forecast/:id',
@@ -27,9 +27,9 @@ export default new Router({
       component: ForecastInfo
     },
     {
-      path: '/historical-search',
-      name: 'historical-search',
-      component: HistoricalSearch
+      path: '/historical-locations',
+      name: 'historical-locations',
+      component: HistoricalLocations
     }
   ]
 })

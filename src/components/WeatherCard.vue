@@ -4,6 +4,8 @@
     class="mx-auto"
     color="#F9F9F9"
     max-width="344"
+    :to="{name: 'forecast', params : {id: id}}"
+    :elevation="10"
   >
     <v-list-item two-line>
       <v-list-item-content>
@@ -48,7 +50,8 @@
 export default {
     props:{
         weatherForecast: Object,
-        cityName : String
+        cityName : String,
+        id: 0
     },
     filters: {
         formatValue(value){

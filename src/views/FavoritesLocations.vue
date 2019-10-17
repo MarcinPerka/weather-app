@@ -15,7 +15,7 @@
      <div v-else>
        <h2>Current weather in favourite locations</h2>
        <div class="text-center my-2" v-for="(savedCurrentWeather, index) in savedCurrentWeathers" :key="index">
-        <WeatherCard :weatherForecast="savedCurrentWeather" :cityName="savedCurrentWeather.name" />
+        <WeatherCard :weatherForecast="savedCurrentWeather" :cityName="savedCurrentWeather.name" :id="savedCurrentWeather.id"   />
         </div>
     </div>
   </section>
@@ -32,20 +32,16 @@ export default {
     },
   data(){
     return{
-      savedLocations: [],
-      savedCurrentWeathers: {},
+      favoritesCities: new Set(),
+      savedCurrentWeathers: new Array(),
       loading: true,
       errored: false
     }
   },
-  mounted(){
-    var storedLocations = [524901, 2643743];
-    localStorage.setItem("savedLocations", JSON.stringify(storedLocations));
-    
-    this.savedLocations = JSON.parse(localStorage.getItem("savedLocations"));
-    
-    for (var i = 0; i < this.savedLocations.length; i++) {
-    let url = `http://api.openweathermap.org/data/2.5/weather?id=${this.savedLocations[i]}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
+  methods:{
+    getCurrentWeather(id){
+      let url = `http://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
+      let data =
             axios
                 .get(url, { timeout: 500 })
                 .then(response =>{
@@ -53,8 +49,18 @@ export default {
                 }).catch(error =>{
                     console.log(error)
                 this.errored = true
-                }).finally(() => this.loading = false)
+                })
+      
     }
+  },
+  mounted(){
+    
+    this.favoritesCities = JSON.parse(localStorage.getItem("favoritesCities"));
+    this.favoritesCities.reverse()
+    for (var i = 0; i < this.favoritesCities.length; i++) {
+      this.getCurrentWeather(this.favoritesCities[i])
+    }
+    this.loading = false
   }
 }
 </script>
