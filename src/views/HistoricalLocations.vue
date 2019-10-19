@@ -56,12 +56,12 @@ export default {
   mounted(){
     
     this.historicalCities = JSON.parse(localStorage.getItem("historicalCities"));
+    if(this.historicalCities.length > 0){
     this.historicalCities.reverse()
-
     for (var i = 0; i < this.historicalCities.length; i++) {
       this.getCurrentWeather(this.historicalCities[i])
     }
-  
+    }
     this.loading = false
   }
 }

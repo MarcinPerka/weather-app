@@ -30,13 +30,13 @@
   >
   <v-row>
     <v-col cols="3">
-      <v-btn  @click="addToHistoricalCities(city.id)"  icon><v-icon>fas fa-ellipsis-h</v-icon></v-btn>
+      <v-btn  @click="addToHistoricalCities(city.id)"  icon class="blue--text"><v-icon>mdi-menu-open</v-icon></v-btn>
     </v-col>
     <v-col cols="6">
     <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
     </v-col>
     <v-col cols="3">
-    <v-btn text icon @click="toggleFavoritesCities(city.id)" v-bind:class="{ 'amber accent-4 ' :favoritesCities.includes(city.id) }"><v-icon >far fa-heart</v-icon></v-btn>
+    <v-btn text icon @click="toggleFavoritesCities(city.id)" :class="favoritesCities.includes(city.id) ? 'red--text' : ''"><v-icon >mdi-heart</v-icon></v-btn>
     </v-col>
   </v-row>
   </v-card>

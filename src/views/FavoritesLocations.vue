@@ -56,11 +56,13 @@ export default {
   mounted(){
     
     this.favoritesCities = JSON.parse(localStorage.getItem("favoritesCities"));
+    if(this.favoritesCities.length > 0){
     this.favoritesCities.reverse()
+    this.emptyFavorities = false
     for (var i = 0; i < this.favoritesCities.length; i++) {
       this.getCurrentWeather(this.favoritesCities[i])
     }
-  
+        }
     this.loading = false
 }
 }
