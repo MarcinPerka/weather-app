@@ -33,7 +33,7 @@
       <v-btn  @click="addToHistoricalCities(city.id)"  icon class="blue--text"><v-icon>mdi-menu-open</v-icon></v-btn>
     </v-col>
     <v-col cols="6">
-    <v-card-text >{{city.name}}, {{ city.country }}</v-card-text>
+    <v-card-text span>{{city.name}}, {{ city.country }}</v-card-text>
     </v-col>
     <v-col cols="3">
     <v-btn text icon @click="toggleFavoritesCities(city.id)" :class="favoritesCities.includes(city.id) ? 'red--text' : ''"><v-icon >mdi-heart</v-icon></v-btn>
