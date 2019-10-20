@@ -2,10 +2,10 @@
   <div>
       <section v-if="errored">
     <v-icon color="error" dark large>fas fa-times-circle</v-icon>
-    <h2>Something went wrong</h2>
+    <h3 class="my-4">Something went wrong</h3>
   </section>
   <section v-else>
-    <div v-if="loading"><h2>Loading...</h2>
+    <div v-if="loading"><h3>Loading...</h3>
       <v-progress-circular
       :size="50"
       color="primary"
@@ -14,6 +14,10 @@
     </div>
      <div v-else>
        <h2>Current weather in favourite locations</h2>
+       <section v-if="emptyFavorities" class="my-4">
+         <v-icon color="info" dark large>fas fa-info-circle</v-icon>
+    <h3 class="my-4">You don't have any cities saved.</h3>
+       </section>
        <div class="text-center my-2" v-for="(savedCurrentWeather, index) in savedCurrentWeathers" :key="index">
         <WeatherCard :weatherForecast="savedCurrentWeather" :cityName="savedCurrentWeather.name" :id="savedCurrentWeather.id"   />
         </div>
@@ -35,7 +39,8 @@ export default {
       favoritesCities: new Array(),
       savedCurrentWeathers: new Array(),
       loading: true,
-      errored: false
+      errored: false,
+      emptyFavorities: true
     }
   },
   methods:{
@@ -43,7 +48,7 @@ export default {
       let url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
       let data =
             axios
-                .get(url, { timeout: 500 })
+                .get(url,{ timeout: 500, headers: "Access-Control-Allow-Origin: *" })
                 .then(response =>{
                     this.savedCurrentWeathers.push(response.data)
                 }).catch(error =>{
@@ -56,7 +61,7 @@ export default {
   mounted(){
     
     this.favoritesCities = JSON.parse(localStorage.getItem("favoritesCities"));
-    if(this.favoritesCities.length > 0){
+    if(this.favoritesCities != null){
     this.favoritesCities.reverse()
     this.emptyFavorities = false
     for (var i = 0; i < this.favoritesCities.length; i++) {

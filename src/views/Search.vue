@@ -9,10 +9,10 @@
           ></v-text-field>
           <section v-if="errored">
             <v-icon color="error" dark large>fas fa-times-circle</v-icon>
-    <h2>Something went wrong</h2>
+    <h3 class="my-4">Something went wrong</h3>
   </section>
   <section v-else>
-    <div v-if="loading"><h2>Loading...</h2>
+    <div v-if="loading"><h3>Loading...</h3>
       <v-progress-circular
       :size="50"
       color="primary"
@@ -70,7 +70,7 @@ export default {
     //  let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
       let url = `https://cities-ids.herokuapp.com/?q=${this.searchInput}`
       axios
-        .get(url, { timeout: 15000 })
+        .get(url,{ timeout: 5000, headers: "Access-Control-Allow-Origin: *" })
         .then(response => { 
           this.cities = response.data
         })

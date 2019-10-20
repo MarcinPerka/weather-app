@@ -2,10 +2,10 @@
 <div>
       <section v-if="errored">
     <v-icon color="error" dark large>fas fa-times-circle</v-icon>
-    <h2>Something went wrong</h2>
+    <h3 class="my-4">Something went wrong</h3>
   </section>
   <section v-else>
-    <div v-if="loading"><h2>Loading...</h2>
+    <div v-if="loading"><h3>Loading...</h3>
       <v-progress-circular
       :size="50"
       color="primary"
@@ -41,7 +41,7 @@ export default {
     mounted(){
         let url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
             axios
-                .get(url, { timeout: 5000 })
+                .get(url,{ timeout: 500, headers: "Access-Control-Allow-Origin: *" })
                 .then(response =>{
                     this.weatherForecasts=response.data.list
                     this.cityName=response.data.city.name
