@@ -19,9 +19,7 @@
           <v-icon size="24px" color="black">fab fa-github</v-icon>
         </v-btn>
          <v-divider></v-divider>
-         <h8>
           Copyright © 2019, Marcin Perka
-        </h8>
   </v-card>
   </v-footer>
 </template>

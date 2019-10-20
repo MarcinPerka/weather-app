@@ -86,7 +86,7 @@ export default {
         this.saveHistoricalCities()
       }
       if(this.historicalCities.length > 20){
-        this.historicalCities.pop(this.historicalCities.indexOf(0))
+        this.historicalCities.shift()
       }
 
        this.$router.push({ name: 'forecast', params : {id: id} } ) 
@@ -98,8 +98,13 @@ export default {
     toggleFavoritesCities(id){
       if(this.favoritesCities.includes(id) == false)
         this.favoritesCities.push(id)
-      else
-        this.favoritesCities.pop(this.favoritesCities.indexOf(id))
+      else{
+        for( var i = 0; i < this.favoritesCities.length; i++){ 
+          if ( this.favoritesCities[i] === id) {
+            this.favoritesCities.splice(i, 1); 
+          }
+          }        
+      }
        this.saveFavoritesCities()
     },
     saveFavoritesCities(){
