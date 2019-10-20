@@ -2,7 +2,9 @@
   <v-app>
     
   <v-app-bar app>
-    <v-toolbar-title><span>Weather</span> App</v-toolbar-title>
+    <router-link to="/" class="toolbar-title">
+    <v-toolbar-title >Weather App</v-toolbar-title>
+    </router-link>
     <div class="flex-grow-1"></div>
     <v-toolbar-items class="hidden-sm-and-down">
         <v-btn to="/" text>Search</v-btn>
@@ -77,5 +79,9 @@ export default {
       color: #42b983;
     }
   }
+}
+.toolbar-title {
+  color: #000000;
+  text-decoration: inherit;
 }
 </style>

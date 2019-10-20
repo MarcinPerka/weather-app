@@ -39,9 +39,9 @@ export default {
         }
     },
     mounted(){
-        let url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
+        let url = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
             axios
-                .get(url,{ timeout: 500, headers: "Access-Control-Allow-Origin: *" })
+                .get(url,{ timeout: 2000 })
                 .then(response =>{
                     this.weatherForecasts=response.data.list
                     this.cityName=response.data.city.name
