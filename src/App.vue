@@ -1,15 +1,14 @@
 <template>
   <v-app>
-    
   <v-app-bar app>
     <router-link to="/" class="toolbar-title">
-    <v-toolbar-title >Weather App</v-toolbar-title>
+    <v-toolbar-title class="toolbar-title">Weather App</v-toolbar-title>
     </router-link>
     <div class="flex-grow-1"></div>
     <v-toolbar-items class="hidden-sm-and-down">
         <v-btn to="/" text>Search</v-btn>
         <v-btn to="/historical-locations" text>Historical Search</v-btn>
-        <v-btn to="/favorites-locations" text>Favorties Locations</v-btn>
+        <v-btn to="/favorites-locations" text>Favorites Locations</v-btn>
       </v-toolbar-items>
 
       <v-menu>

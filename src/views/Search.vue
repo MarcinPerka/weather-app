@@ -67,7 +67,7 @@ export default {
   methods:{
     getCities(){
       this.loading = true
-    //  let url = `http://openweathermap-helper.herokuapp.com/?q=${searchInput}`
+     // let url = `https://cors-anywhere.herokuapp.com/https://openweathermap-helper.herokuapp.com/?q=${searchInput}`
       let url = ` https://cors-anywhere.herokuapp.com/https://cities-ids.herokuapp.com/?q=${this.searchInput}`
       axios
         .get(url,{ timeout: 5000 })
