@@ -6,7 +6,8 @@
             append-icon="fas fa-search"
             v-model="searchInput"
             @click:append="getCities"
-            @keypress.enter="getCities"
+            @keydown.enter.prevent="getCities"
+            :rules="searchInputRules"
           ></v-text-field>
           <section v-if="errored">
             <v-icon color="error" dark large>fas fa-times-circle</v-icon>
@@ -67,16 +68,17 @@ export default {
   },
   methods:{
     getCities(){
+      this.errored = false
       this.loading = true
      // let url = `https://cors-anywhere.herokuapp.com/https://openweathermap-helper.herokuapp.com/?q=${searchInput}`
       let url = ` https://cors-anywhere.herokuapp.com/https://cities-ids.herokuapp.com/?q=${this.searchInput}`
-      axios
+    axios
         .get(url,{ timeout: 5000 })
         .then(response => { 
           this.cities = response.data
         })
         .catch(error =>{
-          console.log(error.response)
+          console.log(error)
           this.errored = true
         })
         .finally(() => this.loading = false)
