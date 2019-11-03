@@ -2,10 +2,8 @@
   <div class="text-center">
     <v-dialog v-model="dialog" width="300" >
       <template v-slot:activator="{ on }">
-        <v-btn fab dark x-small color="red" :on="on" >
-          <v-icon dark>mdi-minus</v-icon>
-        </v-btn>
-      </template>
+      <v-btn fab dark x-small color="red" @click.stop="dialog = true"><v-icon>mdi-minus</v-icon></v-btn>
+ </template>
 
       <v-card>
         <v-card-title bold class="info white--text" primary-title>Are you sure?</v-card-title>
