@@ -10,7 +10,7 @@
         <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
       </div>
       <div v-else>
-        <h2>Current weather in favourite locations</h2>
+        <h2>Current weather in favorites locations</h2>
         <section v-if="emptyFavorities" class="my-4">
           <v-icon color="info" dark large>fas fa-info-circle</v-icon>
           <h3 class="my-4">You don't have any cities saved.</h3>
