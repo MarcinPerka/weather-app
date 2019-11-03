@@ -41,8 +41,8 @@ export default {
   },
   data() {
     return {
-      historicalCities: new Array(),
-      savedCurrentWeathers: new Array(),
+      historicalCities: [],
+      savedCurrentWeathers: [],
       loading: true,
       errored: false,
       emptyHistoricalCities: true
@@ -64,16 +64,25 @@ export default {
     }
   },
   mounted() {
-    this.historicalCities = JSON.parse(
-      localStorage.getItem("historicalCities")
-    );
-    if (this.historicalCities != null) {
-      this.historicalCities.reverse();
-      this.emptyHistoricalCities = false;
-      for (var i = 0; i < this.historicalCities.length; i++) {
-        this.loading = true;
-        this.getCurrentWeather(this.historicalCities[i]);
+    if (localStorage.hasOwnProperty("historicalCities") === true) {
+      this.historicalCities = JSON.parse(
+        localStorage.getItem("historicalCities")
+      );
+      if (
+        this.historicalCities !== undefined &&
+        this.historicalCities.length > 0
+      ) {
+        console.log(this.historicalCities)
+        this.historicalCities.reverse();
+        this.emptyHistoricalCities = false;
+        for (var i = 0; i < this.historicalCities.length; i++) {
+          this.getCurrentWeather(this.historicalCities[i]);
+        }
+      } else {
+        this.loading = false;
       }
+    }else{
+      this.loading = false;
     }
   }
 };

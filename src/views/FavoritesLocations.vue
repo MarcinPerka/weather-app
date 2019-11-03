@@ -20,10 +20,11 @@
           v-for="(savedCurrentWeather, index) in savedCurrentWeathers"
           :key="index"
         >
-          <WeatherCard
+          <WeatherCardFav
             :weatherForecast="savedCurrentWeather"
             :cityName="savedCurrentWeather.name"
             :id="savedCurrentWeather.id"
+            @updateFavoritesCities="updateFavoritesCities"
           />
         </div>
       </div>
@@ -33,22 +34,39 @@
 
 <script>
 import axios from "axios";
-import WeatherCard from "../components/WeatherCard.vue";
+import WeatherCardFav from "../components/WeatherCardFav.vue";
 
 export default {
   components: {
-    WeatherCard
+    WeatherCardFav
   },
   data() {
     return {
-      favoritesCities: new Array(),
-      savedCurrentWeathers: new Array(),
+      favoritesCities: [],
+      savedCurrentWeathers: [],
       loading: true,
       errored: false,
       emptyFavorities: true
     };
   },
   methods: {
+    updateFavoritesCities(favoritesCities) {
+      this.favoritesCities = favoritesCities;
+      this.savedCurrentWeathers = [];
+      this.emptyFavorities = true;
+      if (
+        this.favoritesCities !== undefined &&
+        this.favoritesCities.length > 0
+      ) {
+        this.favoritesCities.reverse();
+        this.emptyFavorities = false;
+        for (var i = 0; i < this.favoritesCities.length; i++) {
+          this.getCurrentWeather(this.favoritesCities[i]);
+        }
+      } else {
+        this.loading = false;
+      }
+    },
     getCurrentWeather(id) {
       let url = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
       let data = axios
@@ -64,14 +82,25 @@ export default {
     }
   },
   mounted() {
-    this.favoritesCities = JSON.parse(localStorage.getItem("favoritesCities"));
-    if (this.favoritesCities != null) {
-      this.favoritesCities.reverse();
-      this.emptyFavorities = false;
-      for (var i = 0; i < this.favoritesCities.length; i++) {
-        this.loading = true;
-        this.getCurrentWeather(this.favoritesCities[i]);
+    if (localStorage.hasOwnProperty("favoritesCities") === true) {
+      this.favoritesCities = JSON.parse(
+        localStorage.getItem("favoritesCities")
+      );
+      if (
+        this.favoritesCities !== undefined &&
+        this.favoritesCities.length > 0
+      ) {
+        console.log(this.favoritesCities)
+        this.favoritesCities.reverse();
+        this.emptyFavorities = false;
+        for (var i = 0; i < this.favoritesCities.length; i++) {
+          this.getCurrentWeather(this.favoritesCities[i]);
+        }
+      } else {
+        this.loading = false;
       }
+    }else{
+      this.loading = false;
     }
   }
 };
