@@ -1,6 +1,12 @@
 <template>
   <div>
-    <v-card class="mx-auto" color="#F9F9F9" max-width="344" :elevation="8" v-on:click="redirectToForecast">
+    <v-card
+      class="mx-auto"
+      color="#F9F9F9"
+      max-width="344"
+      :elevation="8"
+      v-on:click="redirectToForecast"
+    >
       <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="headline">{{ cityName }}</v-list-item-title>
@@ -53,9 +59,9 @@ export default {
     id: 0
   },
   methods: {
-    redirectToForecast(){
-      console.log("hello")
-      router.push({name: 'forecast', params : {id: this.id}})
+    redirectToForecast() {
+      console.log("hello");
+      router.push({ name: "forecast", params: { id: this.id } });
     },
     updateFavoritesCities(favoritesCities) {
       this.$emit(`updateFavoritesCities`, favoritesCities);

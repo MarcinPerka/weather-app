@@ -90,7 +90,7 @@ export default {
         this.favoritesCities !== undefined &&
         this.favoritesCities.length > 0
       ) {
-        console.log(this.favoritesCities)
+        console.log(this.favoritesCities);
         this.favoritesCities.reverse();
         this.emptyFavorities = false;
         for (var i = 0; i < this.favoritesCities.length; i++) {
@@ -99,7 +99,7 @@ export default {
       } else {
         this.loading = false;
       }
-    }else{
+    } else {
       this.loading = false;
     }
   }
