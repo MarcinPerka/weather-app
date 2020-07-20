@@ -20,13 +20,13 @@
       </div>
       <div v-else>
         <h2>Results</h2>
-        <div class="my-4" v-for="city in cities" :key="city.id">
+        <div class="my-4" v-for="city in cities" :key="city.openWeatherMapId">
           <v-card
             max-width="500"
             class="mx-auto text-center rounded-card"
             color="grey lighten-3"
             :elevation="10"
-            @click="addToHistoricalCities(city.id)"
+            @click="addToHistoricalCities(city.openWeatherMapId)"
           >
             <v-row>
               <v-col cols="3"></v-col>
@@ -40,8 +40,8 @@
                   text
                   icon
                   large
-                  @click.stop="toggleFavoritesCities(city.id)"
-                  :class="favoritesCities.includes(city.id) ? 'red--text' : ''"
+                  @click.stop="toggleFavoritesCities(city.openWeatherMapId)"
+                  :class="favoritesCities.includes(city.openWeatherMapId) ? 'red--text' : ''"
                 >
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
@@ -76,8 +76,8 @@ export default {
     getCities() {
       this.errored = false;
       this.loading = true;
-      // let url = `https://cors-anywhere.herokuapp.com/https://openweathermap-helper.herokuapp.com/?q=${searchInput}`
-      let url = ` https://cors-anywhere.herokuapp.com/https://cities-ids.herokuapp.com/?q=${this.searchInput}`;
+      let url = `https://cities-rest-api.herokuapp.com/api/cities/regex?text=${this.searchInput}`;
+      // let url = ` https://cors-anywhere.herokuapp.com/https://cities-ids.herokuapp.com/?q=${this.searchInput}`;
       axios
         .get(url, { timeout: 5000 })
         .then(response => {
