@@ -41,7 +41,7 @@ export default {
   },
   mounted() {
     // let url = `https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
-    let url = `http://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
+    let url = `https://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
     axios
       .get(url, { timeout: 5000 })
       .then(response => {
