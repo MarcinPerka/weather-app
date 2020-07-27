@@ -40,7 +40,7 @@ export default {
   methods: {
     removeCity() {
       for (var i = 0; i < this.favoritesCities.length; i++) {
-        if (this.favoritesCities[i] === this.id) {
+        if (this.favoritesCities[i] == this.id) {
           this.favoritesCities.splice(i, 1);
         }
       }
