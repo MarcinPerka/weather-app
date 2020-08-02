@@ -51,7 +51,6 @@ export default {
   methods: {
     getCurrentWeather(id) {
       let url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
-      // let url = `https://cors-anywhere.herokuapp.com/https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
       let data = axios
         .get(url, { timeout: 7000 })
         .then(response => {
