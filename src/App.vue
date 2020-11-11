@@ -7,7 +7,7 @@
       <div class="flex-grow-1"></div>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn to="/" text>Search</v-btn>
-        <v-btn to="/historical-locations" text>Historical Searches</v-btn>
+        <v-btn to="/recently-viewed-locations" text>Recently viewed</v-btn>
         <v-btn to="/favourite-locations" text>Favourite Locations</v-btn>
       </v-toolbar-items>
 
@@ -25,7 +25,7 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-title>
-              <v-btn to="/historical-locations" text>Historical Searches</v-btn>
+              <v-btn to="/recently-viewed-locations" text>Recently viewed</v-btn>
             </v-list-item-title>
           </v-list-item>
           <v-list-item>
@@ -58,8 +58,8 @@ import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
-    Footer
-  }
+    Footer,
+  },
 };
 </script>
 

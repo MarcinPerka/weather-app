@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Search from './views/Search.vue'
 import FavouriteLocations from './views/FavouriteLocations.vue'
 import ForecastInfo from './views/ForecastInfo.vue'
-import HistoricalLocations from './views/HistoricalLocations.vue'
+import RecentlyViewedLocations from './views/RecentlyViewedLocations.vue'
 
 Vue.use(Router)
 
@@ -27,9 +27,9 @@ export default new Router({
       component: ForecastInfo
     },
     {
-      path: '/historical-locations',
-      name: 'historical-locations',
-      component: HistoricalLocations
+      path: '/recently-viewed-locations',
+      name: 'recently-viewed-locations',
+      component: RecentlyViewedLocations
     }
   ]
 })

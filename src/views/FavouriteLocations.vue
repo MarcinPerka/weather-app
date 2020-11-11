@@ -7,7 +7,11 @@
     <section v-else>
       <div v-if="loading">
         <h3>Loading...</h3>
-        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
       </div>
       <div v-else>
         <h2>Current weather in favourite locations</h2>
@@ -38,15 +42,16 @@ import WeatherCardFav from "../components/WeatherCardFav.vue";
 
 export default {
   components: {
-    WeatherCardFav
+    WeatherCardFav,
   },
   data() {
     return {
       favouriteCities: [],
+      recentlyViewedCities: [],
       savedCurrentWeathers: [],
       loading: true,
       errored: false,
-      emptyFavorities: true
+      emptyFavorities: true,
     };
   },
   methods: {
@@ -71,37 +76,40 @@ export default {
       let url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
       let data = axios
         .get(url, { timeout: 5000 })
-        .then(response => {
+        .then((response) => {
           this.savedCurrentWeathers.push(response.data);
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           this.errored = true;
         })
         .finally(() => (this.loading = false));
-    }
-  },
-  mounted() {
-    if (localStorage.hasOwnProperty("favouriteCities") === true) {
-      this.favouriteCities = JSON.parse(
-        localStorage.getItem("favouriteCities")
-      );
-      if (
-        this.favouriteCities !== undefined &&
-        this.favouriteCities.length > 0
-      ) {
-        console.log(this.favouriteCities);
-        this.favouriteCities.reverse();
-        this.emptyFavorities = false;
-        for (var i = 0; i < this.favouriteCities.length; i++) {
-          this.getCurrentWeather(this.favouriteCities[i]);
+    },
+    loadFavouriteCities() {
+      if (localStorage.hasOwnProperty("favouriteCities") === true) {
+        this.favouriteCities = JSON.parse(
+          localStorage.getItem("favouriteCities")
+        );
+        if (
+          this.favouriteCities !== undefined &&
+          this.favouriteCities.length > 0
+        ) {
+          console.log(this.favouriteCities);
+          this.favouriteCities.reverse();
+          this.emptyFavorities = false;
+          for (var i = 0; i < this.favouriteCities.length; i++) {
+            this.getCurrentWeather(this.favouriteCities[i]);
+          }
+        } else {
+          this.loading = false;
         }
       } else {
         this.loading = false;
       }
-    } else {
-      this.loading = false;
     }
+  },
+  mounted() {
+    this.loadFavouriteCities();
   }
 };
 </script>

@@ -16,7 +16,11 @@
     <section v-else>
       <div v-if="loading">
         <h3>Loading...</h3>
-        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
       </div>
       <div v-else>
         <h2>Results</h2>
@@ -26,13 +30,13 @@
             class="mx-auto text-center rounded-card"
             color="grey lighten-3"
             :elevation="10"
-            @click="addToHistoricalCities(city.id)"
+            @click="addToRecentlyViewedCities(city.id)"
           >
             <v-row>
               <v-col cols="3"></v-col>
               <v-col cols="6">
                 <v-card-text>
-                  <h3>{{city.name}}, {{ city.country }}</h3>
+                  <h3>{{ city.name }}, {{ city.country }}</h3>
                 </v-card-text>
               </v-col>
               <v-col cols="3">
@@ -64,12 +68,12 @@ export default {
       cities: {},
       loading: false,
       errored: false,
-      favouriteCities: new Array(),
-      historicalCities: new Array(),
+      favouriteCities: [],
+      recentlyViewedCities: [],
       searchInputRules: [
-        v => !!v || "Place some text please",
-        v => !/^\s+$/.test(v) || "Place some text please"
-      ]
+        (v) => !!v || "Place some text please",
+        (v) => !/^\s+$/.test(v) || "Place some text please",
+      ],
     };
   },
   methods: {
@@ -79,29 +83,29 @@ export default {
       let url = `https://cors-anywhere.herokuapp.com/https://cities-rest-api.herokuapp.com/api/cities/regex?text=${this.searchInput}`;
       axios
         .get(url, { timeout: 5000 })
-        .then(response => {
+        .then((response) => {
           this.cities = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
           this.errored = true;
         })
         .finally(() => (this.loading = false));
     },
-    addToHistoricalCities(id) {
-      if (this.historicalCities.includes(id) == false) {
-        this.historicalCities.push(id);
-        this.saveHistoricalCities();
+    addToRecentlyViewedCities(id) {
+      if (this.recentlyViewedCities.includes(id) == false) {
+        this.recentlyViewedCities.push(id);
+        this.saveRecentlyViewedCities();
       }
-      if (this.historicalCities.length > 20) {
-        this.historicalCities.shift();
+      if (this.recentlyViewedCities.length > 20) {
+        this.recentlyViewedCities.shift();
       }
 
       this.$router.push({ name: "forecast", params: { id: id } });
     },
-    saveHistoricalCities() {
-      const parsed = JSON.stringify(this.historicalCities);
-      localStorage.setItem(`historicalCities`, parsed);
+    saveRecentlyViewedCities() {
+      const parsed = JSON.stringify(this.recentlyViewedCities);
+      localStorage.setItem(`recentlyViewedCities`, parsed);
     },
     toggleFavouriteCities(id) {
       if (this.favouriteCities.includes(id) == false)
@@ -118,28 +122,33 @@ export default {
     saveFavouriteCities() {
       const parsed = JSON.stringify(this.favouriteCities);
       localStorage.setItem(`favouriteCities`, parsed);
+    },
+    loadFavouriteCities() {
+      if (localStorage.getItem(`favouriteCities`)) {
+        try {
+          this.favouriteCities = JSON.parse(
+            localStorage.getItem(`favouriteCities`)
+          );
+        } catch (e) {
+          localStorage.removeItem(`favouriteCities`);
+        }
+      }
+    },
+    loadRecentlyViewedCities() {
+      if (localStorage.getItem(`recentlyViewedCities`)) {
+        try {
+          this.recentlyViewedCities = JSON.parse(
+            localStorage.getItem(`recentlyViewedCities`)
+          );
+        } catch (e) {
+          localStorage.removeItem(`recentlyViewedCities`);
+        }
+      }
     }
   },
   mounted() {
-    if (localStorage.getItem(`favouriteCities`)) {
-      try {
-        this.favouriteCities = JSON.parse(
-          localStorage.getItem(`favouriteCities`)
-        );
-      } catch (e) {
-        localStorage.removeItem(`favouriteCities`);
-      }
-    }
-
-    if (localStorage.getItem(`historicalCities`)) {
-      try {
-        this.historicalCities = JSON.parse(
-          localStorage.getItem(`historicalCities`)
-        );
-      } catch (e) {
-        localStorage.removeItem(`historicalCities`);
-      }
-    }
+    this.loadFavouriteCities();
+    this.loadRecentlyViewedCities();
   }
 };
 </script>

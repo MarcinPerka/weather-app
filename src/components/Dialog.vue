@@ -8,11 +8,14 @@
       </template>
 
       <v-card>
-        <v-card-title bold class="info white--text" primary-title>Are you sure?</v-card-title>
+        <v-card-title bold class="info white--text" primary-title
+          >Are you sure?</v-card-title
+        >
 
-        <v-card-text
-          class="text-justify"
-        >Do you really want to delete this location from favourite? This process cannot be undone.</v-card-text>
+        <v-card-text class="text-justify"
+          >Do you really want to delete this location from favourite? This
+          process cannot be undone.</v-card-text
+        >
 
         <v-divider></v-divider>
 
@@ -35,7 +38,7 @@ export default {
     };
   },
   props: {
-    id: 0
+    id: 0,
   },
   methods: {
     removeCity() {
@@ -51,7 +54,7 @@ export default {
     saveFavouriteCities() {
       const parsed = JSON.stringify(this.favouriteCities);
       localStorage.setItem(`favouriteCities`, parsed);
-    }
+    },
   },
   mounted() {
     if (localStorage.getItem(`favouriteCities`)) {
@@ -63,6 +66,6 @@ export default {
         localStorage.removeItem(`favouriteCities`);
       }
     }
-  }
+  },
 };
 </script>

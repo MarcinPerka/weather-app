@@ -7,7 +7,11 @@
     <section v-else>
       <div v-if="loading">
         <h3>Loading...</h3>
-        <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
+        <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
       </div>
       <div v-else>
         <h2>Forecast</h2>
@@ -16,7 +20,10 @@
           v-for="(weatherForecast, index) in weatherForecasts"
           :key="index"
         >
-          <ForecastCard :weatherForecast="weatherForecast" :cityName="cityName" />
+          <ForecastCard
+            :weatherForecast="weatherForecast"
+            :cityName="cityName"
+          />
         </div>
       </div>
     </section>
@@ -29,14 +36,14 @@ import ForecastCard from "../components/ForecastCard.vue";
 
 export default {
   components: {
-    ForecastCard
+    ForecastCard,
   },
   data() {
     return {
       weatherForecasts: [],
       loading: true,
       errored: false,
-      cityName: ""
+      cityName: "",
     };
   },
   mounted() {
@@ -44,15 +51,15 @@ export default {
     let url = `https://api.openweathermap.org/data/2.5/forecast?id=${this.$route.params.id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
     axios
       .get(url, { timeout: 5000 })
-      .then(response => {
+      .then((response) => {
         this.weatherForecasts = response.data.list;
         this.cityName = response.data.city.name;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         this.errored = true;
       })
       .finally(() => (this.loading = false));
-  }
+  },
 };
 </script>

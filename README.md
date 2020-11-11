@@ -1,5 +1,5 @@
 # weather-app
-This web app communicates with open weather map API and displays current weather and 5 day forecast for that location. If you want to know weather in any other city/country you can add it to your favourite locations and get weather for them, also App is saving 20 historical searches in other tab.
+This web app communicates with open weather map API and displays current weather and 5 day forecast for that location. If you want to know weather in any other city/country you can add it to your favourite locations and get weather for them, also App is saving 20 recently viewed cities in other tab.
 It is a PWA application. You can add install it on your mobile phone.
 
 ## Live
