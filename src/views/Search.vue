@@ -40,8 +40,8 @@
                   text
                   icon
                   large
-                  @click.stop="toggleFavoritesCities(city.id)"
-                  :class="favoritesCities.includes(city.id) ? 'red--text' : ''"
+                  @click.stop="toggleFavouriteCities(city.id)"
+                  :class="favouriteCities.includes(city.id) ? 'red--text' : ''"
                 >
                   <v-icon>mdi-heart</v-icon>
                 </v-btn>
@@ -64,7 +64,7 @@ export default {
       cities: {},
       loading: false,
       errored: false,
-      favoritesCities: new Array(),
+      favouriteCities: new Array(),
       historicalCities: new Array(),
       searchInputRules: [
         v => !!v || "Place some text please",
@@ -103,31 +103,31 @@ export default {
       const parsed = JSON.stringify(this.historicalCities);
       localStorage.setItem(`historicalCities`, parsed);
     },
-    toggleFavoritesCities(id) {
-      if (this.favoritesCities.includes(id) == false)
-        this.favoritesCities.push(id);
+    toggleFavouriteCities(id) {
+      if (this.favouriteCities.includes(id) == false)
+        this.favouriteCities.push(id);
       else {
-        for (var i = 0; i < this.favoritesCities.length; i++) {
-          if (this.favoritesCities[i] === id) {
-            this.favoritesCities.splice(i, 1);
+        for (var i = 0; i < this.favouriteCities.length; i++) {
+          if (this.favouriteCities[i] === id) {
+            this.favouriteCities.splice(i, 1);
           }
         }
       }
-      this.saveFavoritesCities();
+      this.saveFavouriteCities();
     },
-    saveFavoritesCities() {
-      const parsed = JSON.stringify(this.favoritesCities);
-      localStorage.setItem(`favoritesCities`, parsed);
+    saveFavouriteCities() {
+      const parsed = JSON.stringify(this.favouriteCities);
+      localStorage.setItem(`favouriteCities`, parsed);
     }
   },
   mounted() {
-    if (localStorage.getItem(`favoritesCities`)) {
+    if (localStorage.getItem(`favouriteCities`)) {
       try {
-        this.favoritesCities = JSON.parse(
-          localStorage.getItem(`favoritesCities`)
+        this.favouriteCities = JSON.parse(
+          localStorage.getItem(`favouriteCities`)
         );
       } catch (e) {
-        localStorage.removeItem(`favoritesCities`);
+        localStorage.removeItem(`favouriteCities`);
       }
     }
 
@@ -149,7 +149,3 @@ export default {
   border-radius: 20px;
 }
 </style>
-
-  
-
-

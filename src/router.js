@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Search from './views/Search.vue'
-import FavoritesLocations from './views/FavoritesLocations.vue'
+import FavouriteLocations from './views/FavouriteLocations.vue'
 import ForecastInfo from './views/ForecastInfo.vue'
 import HistoricalLocations from './views/HistoricalLocations.vue'
 
@@ -17,9 +17,9 @@ export default new Router({
       component: Search
     },
     {
-      path: '/favorites-locations',
-      name: 'favorites-locations',
-      component: FavoritesLocations
+      path: '/favourite-locations',
+      name: 'favourite-locations',
+      component: FavouriteLocations
     },
     {
       path: '/forecast/:id',

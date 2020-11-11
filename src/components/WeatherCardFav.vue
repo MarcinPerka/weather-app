@@ -12,7 +12,7 @@
           <v-list-item-title class="headline">{{ cityName }}</v-list-item-title>
           <v-list-item-subtitle>{{ weatherForecast.weather[0].description }}</v-list-item-subtitle>
         </v-list-item-content>
-        <Dialog :id="id" @updateFavoritesCities="updateFavoritesCities" />
+        <Dialog :id="id" @updateFavouriteCities="updateFavouriteCities" />
       </v-list-item>
 
       <v-card-text>
@@ -63,8 +63,8 @@ export default {
       console.log("hello");
       router.push({ name: "forecast", params: { id: this.id } });
     },
-    updateFavoritesCities(favoritesCities) {
-      this.$emit(`updateFavoritesCities`, favoritesCities);
+    updateFavouriteCities(favouriteCities) {
+      this.$emit(`updateFavouriteCities`, favouriteCities);
     }
   },
   filters: {

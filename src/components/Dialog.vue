@@ -12,7 +12,7 @@
 
         <v-card-text
           class="text-justify"
-        >Do you really want to delete this location from favorites? This process cannot be undone.</v-card-text>
+        >Do you really want to delete this location from favourite? This process cannot be undone.</v-card-text>
 
         <v-divider></v-divider>
 
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       dialog: false,
-      favoritesCities: new Array()
+      favouriteCities: new Array()
     };
   },
   props: {
@@ -39,28 +39,28 @@ export default {
   },
   methods: {
     removeCity() {
-      for (var i = 0; i < this.favoritesCities.length; i++) {
-        if (this.favoritesCities[i] == this.id) {
-          this.favoritesCities.splice(i, 1);
+      for (var i = 0; i < this.favouriteCities.length; i++) {
+        if (this.favouriteCities[i] == this.id) {
+          this.favouriteCities.splice(i, 1);
         }
       }
       this.dialog = false;
-      this.saveFavoritesCities();
-      this.$emit(`updateFavoritesCities`, this.favoritesCities);
+      this.saveFavouriteCities();
+      this.$emit(`updateFavouriteCities`, this.favouriteCities);
     },
-    saveFavoritesCities() {
-      const parsed = JSON.stringify(this.favoritesCities);
-      localStorage.setItem(`favoritesCities`, parsed);
+    saveFavouriteCities() {
+      const parsed = JSON.stringify(this.favouriteCities);
+      localStorage.setItem(`favouriteCities`, parsed);
     }
   },
   mounted() {
-    if (localStorage.getItem(`favoritesCities`)) {
+    if (localStorage.getItem(`favouriteCities`)) {
       try {
-        this.favoritesCities = JSON.parse(
-          localStorage.getItem(`favoritesCities`)
+        this.favouriteCities = JSON.parse(
+          localStorage.getItem(`favouriteCities`)
         );
       } catch (e) {
-        localStorage.removeItem(`favoritesCities`);
+        localStorage.removeItem(`favouriteCities`);
       }
     }
   }

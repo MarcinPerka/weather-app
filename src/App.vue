@@ -7,8 +7,8 @@
       <div class="flex-grow-1"></div>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn to="/" text>Search</v-btn>
-        <v-btn to="/historical-locations" text>Historical Search</v-btn>
-        <v-btn to="/favorites-locations" text>Favorites Locations</v-btn>
+        <v-btn to="/historical-locations" text>Historical Searches</v-btn>
+        <v-btn to="/favourite-locations" text>Favourite Locations</v-btn>
       </v-toolbar-items>
 
       <v-menu>
@@ -25,12 +25,12 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-title>
-              <v-btn to="/historical-locations" text>Historical Search</v-btn>
+              <v-btn to="/historical-locations" text>Historical Searches</v-btn>
             </v-list-item-title>
           </v-list-item>
           <v-list-item>
             <v-list-item-title>
-              <v-btn to="/favorites-locations" text>Favorites Locations</v-btn>
+              <v-btn to="/favourite-locations" text>Favourite Locations</v-btn>
             </v-list-item-title>
           </v-list-item>
         </v-list>

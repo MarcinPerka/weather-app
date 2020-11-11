@@ -10,7 +10,7 @@
         <v-progress-circular :size="50" color="primary" indeterminate></v-progress-circular>
       </div>
       <div v-else>
-        <h2>Current weather in favorites locations</h2>
+        <h2>Current weather in favourite locations</h2>
         <section v-if="emptyFavorities" class="my-4">
           <v-icon color="info" dark large>fas fa-info-circle</v-icon>
           <h3 class="my-4">You don't have any cities saved.</h3>
@@ -24,7 +24,7 @@
             :weatherForecast="savedCurrentWeather"
             :cityName="savedCurrentWeather.name"
             :id="savedCurrentWeather.id"
-            @updateFavoritesCities="updateFavoritesCities"
+            @updateFavouriteCities="updateFavouriteCities"
           />
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      favoritesCities: [],
+      favouriteCities: [],
       savedCurrentWeathers: [],
       loading: true,
       errored: false,
@@ -50,18 +50,18 @@ export default {
     };
   },
   methods: {
-    updateFavoritesCities(favoritesCities) {
-      this.favoritesCities = favoritesCities;
+    updateFavouriteCities(favouriteCities) {
+      this.favouriteCities = favouriteCities;
       this.savedCurrentWeathers = [];
       this.emptyFavorities = true;
       if (
-        this.favoritesCities !== undefined &&
-        this.favoritesCities.length > 0
+        this.favouriteCities !== undefined &&
+        this.favouriteCities.length > 0
       ) {
-        this.favoritesCities.reverse();
+        this.favouriteCities.reverse();
         this.emptyFavorities = false;
-        for (var i = 0; i < this.favoritesCities.length; i++) {
-          this.getCurrentWeather(this.favoritesCities[i]);
+        for (var i = 0; i < this.favouriteCities.length; i++) {
+          this.getCurrentWeather(this.favouriteCities[i]);
         }
       } else {
         this.loading = false;
@@ -82,19 +82,19 @@ export default {
     }
   },
   mounted() {
-    if (localStorage.hasOwnProperty("favoritesCities") === true) {
-      this.favoritesCities = JSON.parse(
-        localStorage.getItem("favoritesCities")
+    if (localStorage.hasOwnProperty("favouriteCities") === true) {
+      this.favouriteCities = JSON.parse(
+        localStorage.getItem("favouriteCities")
       );
       if (
-        this.favoritesCities !== undefined &&
-        this.favoritesCities.length > 0
+        this.favouriteCities !== undefined &&
+        this.favouriteCities.length > 0
       ) {
-        console.log(this.favoritesCities);
-        this.favoritesCities.reverse();
+        console.log(this.favouriteCities);
+        this.favouriteCities.reverse();
         this.emptyFavorities = false;
-        for (var i = 0; i < this.favoritesCities.length; i++) {
-          this.getCurrentWeather(this.favoritesCities[i]);
+        for (var i = 0; i < this.favouriteCities.length; i++) {
+          this.getCurrentWeather(this.favouriteCities[i]);
         }
       } else {
         this.loading = false;
