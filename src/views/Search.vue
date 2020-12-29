@@ -86,8 +86,7 @@ export default {
         .then((response) => {
           this.cities = response.data
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
           this.errored = true
         })
         .finally(() => (this.loading = false))

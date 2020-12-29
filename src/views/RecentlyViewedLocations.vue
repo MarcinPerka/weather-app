@@ -60,8 +60,7 @@ export default {
         .then((response) => {
           this.savedCurrentWeathers.push(response.data)
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
           this.errored = true
         })
         .finally(() => (this.loading = false))
@@ -75,7 +74,6 @@ export default {
           this.recentlyViewedCities !== undefined &&
           this.recentlyViewedCities.length > 0
         ) {
-          console.log(this.recentlyViewedCities)
           this.recentlyViewedCities.reverse()
           this.emptyRecentlyViewedCities = false
           for (let i = 0; i < this.recentlyViewedCities.length; i++) {

@@ -55,8 +55,7 @@ export default {
         this.weatherForecasts = response.data.list
         this.cityName = response.data.city.name
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         this.errored = true
       })
       .finally(() => (this.loading = false))

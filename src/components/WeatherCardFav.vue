@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     redirectToForecast () {
-      console.log('hello')
       router.push({ name: 'forecast', params: { id: this.id } })
     },
     updateFavouriteCities (favouriteCities) {

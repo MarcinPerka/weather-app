@@ -79,8 +79,7 @@ export default {
         .then((response) => {
           this.savedCurrentWeathers.push(response.data)
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
           this.errored = true
         })
         .finally(() => (this.loading = false))
@@ -94,7 +93,6 @@ export default {
           this.favouriteCities !== undefined &&
           this.favouriteCities.length > 0
         ) {
-          console.log(this.favouriteCities)
           this.favouriteCities.reverse()
           this.emptyFavorities = false
           for (let i = 0; i < this.favouriteCities.length; i++) {
