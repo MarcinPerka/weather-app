@@ -37,79 +37,79 @@
 </template>
 
 <script>
-import axios from "axios";
-import WeatherCardFav from "../components/WeatherCardFav.vue";
+import axios from 'axios'
+import WeatherCardFav from '../components/WeatherCardFav.vue'
 
 export default {
   components: {
-    WeatherCardFav,
+    WeatherCardFav
   },
-  data() {
+  data () {
     return {
       favouriteCities: [],
       recentlyViewedCities: [],
       savedCurrentWeathers: [],
       loading: true,
       errored: false,
-      emptyFavorities: true,
-    };
+      emptyFavorities: true
+    }
   },
   methods: {
-    updateFavouriteCities(favouriteCities) {
-      this.favouriteCities = favouriteCities;
-      this.savedCurrentWeathers = [];
-      this.emptyFavorities = true;
+    updateFavouriteCities (favouriteCities) {
+      this.favouriteCities = favouriteCities
+      this.savedCurrentWeathers = []
+      this.emptyFavorities = true
       if (
         this.favouriteCities !== undefined &&
         this.favouriteCities.length > 0
       ) {
-        this.favouriteCities.reverse();
-        this.emptyFavorities = false;
-        for (var i = 0; i < this.favouriteCities.length; i++) {
-          this.getCurrentWeather(this.favouriteCities[i]);
+        this.favouriteCities.reverse()
+        this.emptyFavorities = false
+        for (let i = 0; i < this.favouriteCities.length; i++) {
+          this.getCurrentWeather(this.favouriteCities[i])
         }
       } else {
-        this.loading = false;
+        this.loading = false
       }
     },
-    getCurrentWeather(id) {
-      let url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`;
-      let data = axios
+    getCurrentWeather (id) {
+      let url = `https://api.openweathermap.org/data/2.5/weather?id=${id}&units=metric&APPID=0722763b1e850c2c1e3d7ce91a8b83ff`
+      axios
         .get(url, { timeout: 5000 })
         .then((response) => {
-          this.savedCurrentWeathers.push(response.data);
+          this.savedCurrentWeathers.push(response.data)
         })
         .catch((error) => {
-          console.log(error);
-          this.errored = true;
+          console.log(error)
+          this.errored = true
         })
-        .finally(() => (this.loading = false));
+        .finally(() => (this.loading = false))
     },
-    loadFavouriteCities() {
-      if (localStorage.hasOwnProperty("favouriteCities") === true) {
+    loadFavouriteCities () {
+      if (localStorage.hasOwnProperty('favouriteCities') === true) {
         this.favouriteCities = JSON.parse(
-          localStorage.getItem("favouriteCities")
-        );
+          localStorage.getItem('favouriteCities')
+        )
         if (
           this.favouriteCities !== undefined &&
           this.favouriteCities.length > 0
         ) {
-          console.log(this.favouriteCities);
-          this.favouriteCities.reverse();
-          this.emptyFavorities = false;
-          for (var i = 0; i < this.favouriteCities.length; i++) {
-            this.getCurrentWeather(this.favouriteCities[i]);
+          console.log(this.favouriteCities)
+          this.favouriteCities.reverse()
+          this.emptyFavorities = false
+          for (let i = 0; i < this.favouriteCities.length; i++) {
+            this.getCurrentWeather(this.favouriteCities[i])
           }
         } else {
-          this.loading = false;
+          this.loading = false
         }
       } else {
-        this.loading = false;
+        this.loading = false
       }
     }
   },
-  mounted() {
-    this.loadFavouriteCities();
+  mounted () {
+    this.loadFavouriteCities()
   }
-};
+}
 </script>

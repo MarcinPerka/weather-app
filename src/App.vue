@@ -49,18 +49,18 @@
       </v-container>
     </v-content>
 
-    <Footer />
+    <Footer/>
   </v-app>
 </template>
 
 <script>
-import Footer from "@/components/Footer.vue";
+import Footer from '@/components/Footer.vue'
 
 export default {
   components: {
-    Footer,
-  },
-};
+    Footer
+  }
+}
 </script>
 
 <style lang="scss">
@@ -71,15 +71,18 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
 #nav {
   a {
     font-weight: bold;
     color: #2c3e50;
+
     &.router-link-exact-active {
       color: #42b983;
     }
   }
 }
+
 .toolbar-title {
   color: #000000;
   text-decoration: inherit;

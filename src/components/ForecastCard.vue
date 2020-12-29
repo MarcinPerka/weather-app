@@ -4,13 +4,16 @@
       <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="headline">{{ cityName }}</v-list-item-title>
-          <v-list-item-subtitle>{{ weatherForecast.dt_txt }}, {{ weatherForecast.weather[0].description }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ weatherForecast.dt_txt }}, {{
+              weatherForecast.weather[0].description
+            }}
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
       <v-card-text>
         <v-row align="center">
-          <v-col class="display-2" cols="6">{{ weatherForecast.main.temp | formatValue}} &deg;C</v-col>
+          <v-col class="display-2" cols="6">{{ weatherForecast.main.temp | formatValue }} &deg;C</v-col>
           <v-col cols="6">
             <v-img
               :src="'http://openweathermap.org/img/wn/'+weatherForecast.weather[0].icon+'@2x.png'"
@@ -25,7 +28,7 @@
         <v-list-item-icon>
           <v-icon>mdi-send</v-icon>
         </v-list-item-icon>
-        <v-list-item-subtitle>{{ weatherForecast.wind.speed | formatValue}} km/h</v-list-item-subtitle>
+        <v-list-item-subtitle>{{ weatherForecast.wind.speed | formatValue }} km/h</v-list-item-subtitle>
       </v-list-item>
 
       <v-list-item>
@@ -45,9 +48,9 @@ export default {
     cityName: String
   },
   filters: {
-    formatValue(value) {
-      return parseInt(value, 10);
+    formatValue (value) {
+      return parseInt(value, 10)
     }
   }
-};
+}
 </script>

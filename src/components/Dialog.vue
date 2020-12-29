@@ -9,12 +9,14 @@
 
       <v-card>
         <v-card-title bold class="info white--text" primary-title
-          >Are you sure?</v-card-title
+        >Are you sure?
+        </v-card-title
         >
 
         <v-card-text class="text-justify"
-          >Do you really want to delete this location from favourite? This
-          process cannot be undone.</v-card-text
+        >Do you really want to delete this location from favourite? This
+          process cannot be undone.
+        </v-card-text
         >
 
         <v-divider></v-divider>
@@ -31,41 +33,41 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       dialog: false,
-      favouriteCities: new Array()
-    };
+      favouriteCities: []
+    }
   },
   props: {
-    id: 0,
+    id: String
   },
   methods: {
-    removeCity() {
-      for (var i = 0; i < this.favouriteCities.length; i++) {
-        if (this.favouriteCities[i] == this.id) {
-          this.favouriteCities.splice(i, 1);
+    removeCity () {
+      for (let i = 0; i < this.favouriteCities.length; i++) {
+        if (this.favouriteCities[i] === this.id) {
+          this.favouriteCities.splice(i, 1)
         }
       }
-      this.dialog = false;
-      this.saveFavouriteCities();
-      this.$emit(`updateFavouriteCities`, this.favouriteCities);
+      this.dialog = false
+      this.saveFavouriteCities()
+      this.$emit(`updateFavouriteCities`, this.favouriteCities)
     },
-    saveFavouriteCities() {
-      const parsed = JSON.stringify(this.favouriteCities);
-      localStorage.setItem(`favouriteCities`, parsed);
-    },
+    saveFavouriteCities () {
+      const parsed = JSON.stringify(this.favouriteCities)
+      localStorage.setItem(`favouriteCities`, parsed)
+    }
   },
-  mounted() {
+  mounted () {
     if (localStorage.getItem(`favouriteCities`)) {
       try {
         this.favouriteCities = JSON.parse(
           localStorage.getItem(`favouriteCities`)
-        );
+        )
       } catch (e) {
-        localStorage.removeItem(`favouriteCities`);
+        localStorage.removeItem(`favouriteCities`)
       }
     }
-  },
-};
+  }
+}
 </script>
