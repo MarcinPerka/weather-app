@@ -49,7 +49,7 @@ export default {
   props: {
     weatherForecast: Object,
     cityName: String,
-    id: String
+    id: Number
   },
   filters: {
     formatValue (value) {

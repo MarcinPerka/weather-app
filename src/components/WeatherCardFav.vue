@@ -56,7 +56,7 @@ export default {
   props: {
     weatherForecast: Object,
     cityName: String,
-    id: String
+    id: Number
   },
   methods: {
     redirectToForecast () {

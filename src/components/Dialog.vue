@@ -40,12 +40,12 @@ export default {
     }
   },
   props: {
-    id: String
+    id: Number
   },
   methods: {
     removeCity () {
       for (let i = 0; i < this.favouriteCities.length; i++) {
-        if (this.favouriteCities[i] === this.id) {
+        if (+this.favouriteCities[i] === this.id) {
           this.favouriteCities.splice(i, 1)
         }
       }
