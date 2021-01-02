@@ -111,7 +111,7 @@ export default {
         this.favouriteCities.push(id)
       } else {
         for (let i = 0; i < this.favouriteCities.length; i++) {
-          if (this.favouriteCities[i] === id) {
+          if (+this.favouriteCities[i] === id) {
             this.favouriteCities.splice(i, 1)
           }
         }
