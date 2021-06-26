@@ -80,7 +80,7 @@ export default {
     getCities () {
       this.errored = false
       this.loading = true
-      let url = `https://cors-anywhere.herokuapp.com/https://cities-rest-api.herokuapp.com/api/cities/regex?text=${this.searchInput}`
+      let url = `https://cities-rest-api.herokuapp.com/api/cities/regex?text=${this.searchInput}`
       axios
         .get(url, { timeout: 5000 })
         .then((response) => {
